@@ -65,6 +65,5 @@ libs/Pixel/docs/.gitkeep
 libs/Pixel/docs/physical_device.txt
 libs/Pixel/docs/system_diagram.png
 libs/Pixel/example/.gitkeep
-libs/Pixel/example/opc.py
 libs/Pixel/example/simple_example.py
 libs/Pixel/simulator/bin/application.linux-armv6hf/readopcForStrandsver3
