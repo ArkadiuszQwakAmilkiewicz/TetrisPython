@@ -622,6 +622,7 @@ def NewGameAnimation():
     global led_colour
     staticElements = []
     kappaPride = []
+    kappaapride2 = []
     #create 6 static objects with random sizes 2-4 and random deleys 0-5
     count = 0 
     while count<6:
