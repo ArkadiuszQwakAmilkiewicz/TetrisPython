@@ -72,7 +72,7 @@ def ShowMenu():
     print("'EXIT' - CLOSE")
     print("'HELP' - HELP")
     
-
+#Gets message from the terminal (user)
 def GetInput():
     if gameOn:
         print("GameInput: ")
@@ -105,11 +105,12 @@ def GameInput(usrInput):
         #approved
     elif usrInput == "RESTART":
         NewGame()
-        #restart
+        #restart/close
     elif usrInput == "EXIT":
         CloseGame()
-        #close
-        CloseGame()
+        ShowMenu()
+
+        
     elif usrInput == "HELP":
         ShowHelp()
     else:
@@ -449,8 +450,8 @@ def NewGame():
     global staticElements
     global isLost
     NewGameAnimation()
-    time.sleep(5)
-    GameResetAnimation()
+    time.sleep(0.5)
+    #GameResetAnimation()
     gameOn = True
     isLost = False
     ResetAllLeds()
@@ -477,18 +478,17 @@ def NewGame():
     
     print("TETRIS GAME")
     print("WRITE 'HELP' TO SEE CONTROLS AND OTHER COMMANDS")
-
+# resets the game
 def GameLost():
-    print("U lose")
+    CloseGame()
+    NewGame()
 
 def CloseGame():
     global gameOn
-    NewGame()
     gameOn = False
-    ShowMenu()
-    ResetAllLeds()
-    print("callled")
-
+    GameResetAnimation()
+    #debug print("callled")
+# creates new game object TetrisObj
 def CreateNewBlock():
     global newBlock
     newBlock = BlockOfBlocks()
@@ -497,19 +497,19 @@ def CreateNewBlock():
     newBlock.previousPositionY = 2
     newBlock.GenerateBlocks()
     newBlock.Update()
-
+#controls
 def RotateBlock():
     global newBlock
     newBlock.RotateBlock()
-
+#controls
 def MoveUpBlock():
     global newBlock
     newBlock.MoveUp()
-
+#controls
 def MoveDownBlock():
     global newBlock
     newBlock.MoveDown()
-
+#controls
 def ApproveBlock():
     global newBlock
     global staticElements
@@ -534,7 +534,7 @@ def ApproveBlock():
         CreateNewBlock()
     else:
         GameLost()
-
+#Checks if the "row is ready" then deletes the row
 def FullColumnCheck():
     global staticElements
     for el in staticElements:
@@ -546,7 +546,7 @@ def FullColumnCheck():
                     elementsInTheCollumn = elementsInTheCollumn + 1
         if elementsInTheCollumn > 5:
             DeleteCollumn(el.positionX)
-
+#deletes "row"
 def DeleteCollumn(x):
     #find all static elements in collumn x
     global staticElements
@@ -615,7 +615,7 @@ def FadeOut(listOfLeds, fromColour):
         Refresh()
         time.sleep(0.006)
 
-
+#"RAIN"
 def NewGameAnimation():
     global staticElements
     global LoseWall
@@ -654,7 +654,7 @@ def NewGameAnimation():
         Refresh()
     #move them
 
-
+#wave
 def GameResetAnimation():
     global staticElements
     
@@ -738,7 +738,7 @@ class Point:
                 return False
             else:
                 return True
-
+#SPEDDY
 def CloseAppAnimation():
     global led_colour
     global staticElements
@@ -869,8 +869,6 @@ def Refresh():
     global led_colour
     global client
     client.put_pixels(led_colour)
-
-
 
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------
